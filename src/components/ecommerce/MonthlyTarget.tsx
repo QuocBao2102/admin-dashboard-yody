@@ -25,7 +25,10 @@ export default function MonthlyTarget({
     percentageAchieved: 0,
   },
 }: MonthlyTargetProps) {
-  const series = [data.percentageAchieved];
+  // Làm tròn số phần trăm thành số nguyên
+  const roundedPercentage = Math.round(data.percentageAchieved);
+  const series = [roundedPercentage];
+  
   const options: ApexOptions = {
     colors: ["#465FFF"],
     chart: {
@@ -58,7 +61,8 @@ export default function MonthlyTarget({
             offsetY: -40,
             color: "#1D2939",
             formatter: function (val) {
-              return val + "%";
+              // Formatter không cần làm tròn nữa vì đã làm tròn ở series
+              return Math.round(val) + "%";
             },
           },
         },
